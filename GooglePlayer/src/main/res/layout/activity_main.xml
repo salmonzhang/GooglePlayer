@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    android:orientation="vertical"
+    android:id="@+id/dl_main_root_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.itheima.googleplaymark.ui.activity.MainActivity">
+
+    <!--主界面-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/ll_main_show_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </LinearLayout>
+
+    <!--侧滑菜单-->
+    <FrameLayout
+        android:id="@+id/fl_main_menu_layout"
+        android:layout_gravity="start"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        //侧滑菜单布局
+        <include layout="@layout/menu_list"/>
+    </FrameLayout>
+
+</android.support.v4.widget.DrawerLayout>
