@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.itheima.googleplaymark.bean.HomeBean;
+import com.itheima.googleplaymark.cachemanager.JsonCacheManager;
 import com.itheima.googleplaymark.uimanager.LoadPager;
 
 /**
@@ -22,14 +24,20 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //使用UI切换框架加载页面
         LoadPager loadPager = new LoadPager(getContext()) {
+            //获取数据
             @Override
             protected Object getNetData() {
-                return null;
+                JsonCacheManager jsonCacheManager = new JsonCacheManager();
+                String url = "http://127.0.0.1:8090/home?index=0";
+                HomeBean homeBean = (HomeBean) jsonCacheManager.getCacheData(url, HomeBean.class);
+                return homeBean;
             }
 
+            //设置界面
             @Override
             public View createSuccessView() {
                 TextView tv = new TextView(getContext());
+                tv.setText("框架而生");
                 return tv;
             }
         };

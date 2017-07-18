@@ -13,7 +13,7 @@ import com.itheima.googleplaymark.utils.GsonUtil;
 public class JsonCacheManager {
 
     //获取缓存数据
-    public Object getCacheData(String url ,Class clss){
+    public Object getCacheData(String url,Class clss){
         //1.获取网络数据
         NetManager netManager = new NetManager();
         String content = netManager.getNetData(url);
