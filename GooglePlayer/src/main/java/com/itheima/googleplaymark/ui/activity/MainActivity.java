@@ -1,5 +1,6 @@
 package com.itheima.googleplaymark.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,7 @@ import com.itheima.googleplaymark.R;
 import com.itheima.googleplaymark.adapter.MainAdapter;
 import com.itheima.googleplaymark.bean.FragmentInfo;
 import com.itheima.googleplaymark.ui.fragment.HomeFragment;
+import com.itheima.googleplaymark.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +58,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initMain() {
         //初始化适配器数据
-        for (int i = 0; i < 5; i++) {
+        String[] titles = Utils.getStringArray(R.array.tab_names);
+        for (int i = 0; i < titles.length; i++) {
             FragmentInfo fragmentInfo = new FragmentInfo();
             fragmentInfo.fragment = new HomeFragment();
-            fragmentInfo.title = "标题" + i;
+            fragmentInfo.title = titles[i];
             mShowItems.add(fragmentInfo);
         }
 
@@ -68,6 +71,16 @@ public class MainActivity extends AppCompatActivity {
 
         //页签与viewpager绑定
         mTbMainTitleLayout.setupWithViewPager(mVpMainShowContent);
+        //设置颜色
+        int normalColor = Color.parseColor("#8C8C8C");
+        int selectedColor = Color.parseColor("#3949A3");
+        mTbMainTitleLayout.setTabTextColors(normalColor,selectedColor);
+
+        //指示器颜色
+        mTbMainTitleLayout.setSelectedTabIndicatorColor(selectedColor);
+
+        //设置模式
+        mTbMainTitleLayout.setTabMode(TabLayout.GRAVITY_FILL);
     }
 
     private void initActionBar() {
