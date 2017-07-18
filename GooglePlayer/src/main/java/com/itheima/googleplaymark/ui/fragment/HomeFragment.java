@@ -23,9 +23,13 @@ public class HomeFragment extends Fragment {
         //使用UI切换框架加载页面
         LoadPager loadPager = new LoadPager(getContext()) {
             @Override
+            protected Object getNetData() {
+                return null;
+            }
+
+            @Override
             public View createSuccessView() {
                 TextView tv = new TextView(getContext());
-                tv.setText("UI框架");
                 return tv;
             }
         };
