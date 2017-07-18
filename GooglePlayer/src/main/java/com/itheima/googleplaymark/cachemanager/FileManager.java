@@ -7,6 +7,8 @@ import com.itheima.googleplaymark.gloab.GooglePlay;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * author:salmonzhang
@@ -42,9 +44,26 @@ public class FileManager {
     }
 
     //根据url创建一个唯一的文件名
-    private String getFileName(String url){
-        //TODO:后期再写
-        return "123";
+    private String getFileName(String url) {
+        //md5
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(url.getBytes());
+            byte[] digest = messageDigest.digest();
+
+            StringBuffer stringBuffer = new StringBuffer();
+            for (int i = 0; i < digest.length; i++) {
+                String hexString = Integer.toHexString(digest[i]&0xFF);
+                //System.out.println(hexString);
+                stringBuffer.append(hexString);
+            }
+            return stringBuffer.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            //这里暂时不处理,后期跟业务需求去改
+            return "";
+        }
     }
 
     //文件读数据
