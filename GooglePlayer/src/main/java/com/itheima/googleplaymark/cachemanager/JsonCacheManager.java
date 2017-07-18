@@ -19,7 +19,7 @@ public class JsonCacheManager {
     }
 
     //获取缓存数据
-    public Object getCacheData(String url,Class clss){
+    public<T> T getCacheData(String url,Class<T> clss){
         //1.获取网络数据
         String content = NetManager.getInstance().getNetData(url);
 
