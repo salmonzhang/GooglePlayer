@@ -22,7 +22,7 @@ public class JsonCacheManager {
         if (TextUtils.isEmpty(content)) {
             //如果获取到的数据为空，则从缓存中去拿缓存数据
             FileManager fileManager = new FileManager();
-            fileManager.readData(url);
+            content = fileManager.readData(url);
         } else {
             //如果获取到的数据不为空，则从缓存中更新最新的数据
             FileManager fileManager = new FileManager();
