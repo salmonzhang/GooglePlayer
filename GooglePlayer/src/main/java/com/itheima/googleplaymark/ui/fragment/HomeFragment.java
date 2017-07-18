@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.itheima.googleplaymark.uimanager.LoadPager;
+
 /**
  * author:salmonzhang
  * Description:主页面的Fragment
@@ -18,8 +20,15 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        TextView textView = new TextView(getContext());
-        textView.setText("我出来了");
-        return textView;
+        //使用UI切换框架加载页面
+        LoadPager loadPager = new LoadPager(getContext()) {
+            @Override
+            public View createSuccessView() {
+                TextView tv = new TextView(getContext());
+                tv.setText("UI框架");
+                return tv;
+            }
+        };
+        return loadPager;
     }
 }
