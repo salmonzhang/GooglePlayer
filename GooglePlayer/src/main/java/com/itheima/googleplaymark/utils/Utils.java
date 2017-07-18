@@ -93,9 +93,8 @@ public class Utils
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            //这里暂时不处理,后期跟业务需求去改
+            //这里暂时不处理,后期根据业务需求去改
             return "";
-
         }
     }
 

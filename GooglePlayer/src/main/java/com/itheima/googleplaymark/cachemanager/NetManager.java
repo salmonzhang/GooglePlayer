@@ -15,6 +15,12 @@ import okhttp3.Response;
 
 public class NetManager {
 
+    private static NetManager singleton = new NetManager();
+    private NetManager(){}
+    public static NetManager getInstance(){
+           return singleton;
+    }
+
     public String getNetData(String url) {
         try {
             OkHttpClient okHttpClient = new OkHttpClient.Builder().build();

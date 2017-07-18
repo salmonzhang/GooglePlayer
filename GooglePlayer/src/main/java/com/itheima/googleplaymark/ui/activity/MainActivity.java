@@ -60,10 +60,7 @@ public class MainActivity extends AppCompatActivity {
         //初始化适配器数据
         String[] titles = Utils.getStringArray(R.array.tab_names);
         for (int i = 0; i < titles.length; i++) {
-            FragmentInfo fragmentInfo = new FragmentInfo();
-            fragmentInfo.fragment = new HomeFragment();
-            fragmentInfo.title = titles[i];
-            mShowItems.add(fragmentInfo);
+            mShowItems.add(new FragmentInfo(new HomeFragment(), titles[i]));
         }
 
         //初始化viewpager(给viewpager设置适配器)

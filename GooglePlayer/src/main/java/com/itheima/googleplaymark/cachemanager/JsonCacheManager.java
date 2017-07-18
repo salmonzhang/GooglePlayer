@@ -12,21 +12,24 @@ import com.itheima.googleplaymark.utils.GsonUtil;
 
 public class JsonCacheManager {
 
+    private static JsonCacheManager singleton = new JsonCacheManager();
+    private JsonCacheManager(){}
+    public static JsonCacheManager getInstance(){
+           return singleton;
+    }
+
     //获取缓存数据
     public Object getCacheData(String url,Class clss){
         //1.获取网络数据
-        NetManager netManager = new NetManager();
-        String content = netManager.getNetData(url);
+        String content = NetManager.getInstance().getNetData(url);
 
         //2.对获取到的数据进行判空
         if (TextUtils.isEmpty(content)) {
             //如果获取到的数据为空，则从缓存中去拿缓存数据
-            FileManager fileManager = new FileManager();
-            content = fileManager.readData(url);
+            content = FileManager.getInstance().readData(url);
         } else {
             //如果获取到的数据不为空，则从缓存中更新最新的数据
-            FileManager fileManager = new FileManager();
-            fileManager.writeData(url,content);
+            FileManager.getInstance().writeData(url,content);
         }
 
         //3.解析数据

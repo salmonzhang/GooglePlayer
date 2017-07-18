@@ -27,9 +27,8 @@ public class HomeFragment extends Fragment {
             //获取数据
             @Override
             protected Object getNetData() {
-                JsonCacheManager jsonCacheManager = new JsonCacheManager();
                 String url = "http://127.0.0.1:8090/home?index=0";
-                HomeBean homeBean = (HomeBean) jsonCacheManager.getCacheData(url, HomeBean.class);
+                HomeBean homeBean = (HomeBean) JsonCacheManager.getInstance().getCacheData(url, HomeBean.class);
                 return homeBean;
             }
 
