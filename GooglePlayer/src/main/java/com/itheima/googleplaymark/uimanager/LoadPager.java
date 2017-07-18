@@ -42,12 +42,22 @@ public abstract class LoadPager extends FrameLayout {
     private void init() {
 
         //正在加载界面
-        mLoadingView = View.inflate(getContext(), R.layout.page_loading, null);
+        if (mLoadingView == null) {
+            mLoadingView = View.inflate(getContext(), R.layout.page_loading, null);
+        }
         //加载成功界面，（谁用谁传）
-        mSuccessView = createSuccessView();
+        if (mSuccessView == null) {
+            mSuccessView = createSuccessView();
+            if (mSuccessView == null) {
+                throw new RuntimeException("需要添加一个布局");
+            }
+        }
         //加载错误界面
-        mErrorView = View.inflate(getContext(), R.layout.page_error, null);
+        if (mErrorView == null) {
+            mErrorView = View.inflate(getContext(), R.layout.page_error, null);
+        }
 
+        //添加三个布局
         addView(mLoadingView);
         addView(mSuccessView);
         addView(mErrorView);
@@ -79,6 +89,7 @@ public abstract class LoadPager extends FrameLayout {
 
     }
 
+    //校验数据
     private int checkData(Object obj) {
         //如果数据为空，则失败
         if (obj == null) {
@@ -97,6 +108,7 @@ public abstract class LoadPager extends FrameLayout {
         }
     }
 
+    //切换页面
     private void changeView() {
         mLoadingView.setVisibility(GONE);
         mSuccessView.setVisibility(GONE);
