@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.itheima.googleplaymark.R;
+import com.itheima.googleplaymark.utils.Utils;
+
+import java.util.List;
 
 /**
  * author:salmonzhang
@@ -51,6 +54,47 @@ public abstract class LoadPager extends FrameLayout {
 
         //定义一个页面切换的方法
         changeView();
+
+        //根据网络数据，自动切换界面
+        showPager();
+    }
+
+    public void showPager(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //获取网络数据
+                Object obj = getNetData();
+                //校验数据，更换状态
+                mCurrentState = checkData(obj);
+                //切换UI界面
+                Utils.runOnUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        changeView();
+                    }
+                });
+            }
+        }).start();
+
+    }
+
+    private int checkData(Object obj) {
+        //如果数据为空，则失败
+        if (obj == null) {
+            return ERROR;
+        } else {
+            if (obj instanceof List) {//如果是数组
+                List list = (List) obj;
+                if (list.size() > 0) {
+                    return SUCCESS;
+                } else {
+                    return ERROR;
+                }
+            } else {//如果是对象
+                return SUCCESS;
+            }
+        }
     }
 
     private void changeView() {
@@ -78,6 +122,8 @@ public abstract class LoadPager extends FrameLayout {
 
     //定义一个当前状态
     private int mCurrentState = LOADING;
-
+    //获取网络数据
+    protected abstract Object getNetData();
+    //创建一个成功的View界面
     public abstract View createSuccessView();
 }
