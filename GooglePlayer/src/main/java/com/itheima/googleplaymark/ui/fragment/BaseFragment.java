@@ -41,7 +41,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     //子类创建布局
-    protected abstract View createItemView();
+    public abstract View createItemView();
 
     //子类实现数据请求
     public abstract Object questData();

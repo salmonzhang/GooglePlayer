@@ -16,6 +16,7 @@ import com.itheima.googleplaymark.R;
 import com.itheima.googleplaymark.adapter.MainAdapter;
 import com.itheima.googleplaymark.bean.FragmentInfo;
 import com.itheima.googleplaymark.ui.fragment.HomeFragment;
+import com.itheima.googleplaymark.ui.fragment.SubjectFragment;
 import com.itheima.googleplaymark.utils.Utils;
 
 import java.util.ArrayList;
@@ -59,9 +60,15 @@ public class MainActivity extends AppCompatActivity {
     private void initMain() {
         //初始化适配器数据
         String[] titles = Utils.getStringArray(R.array.tab_names);
-        for (int i = 0; i < titles.length; i++) {
-            mShowItems.add(new FragmentInfo(new HomeFragment(), titles[i]));
-        }
+//        for (int i = 0; i < titles.length; i++) {
+//            mShowItems.add(new FragmentInfo(new HomeFragment(), titles[i]));
+//        }
+
+        mShowItems.add(new FragmentInfo(new HomeFragment(), titles[0]));
+        mShowItems.add(new FragmentInfo(new SubjectFragment(), titles[1]));
+        mShowItems.add(new FragmentInfo(new HomeFragment(), titles[2]));
+        mShowItems.add(new FragmentInfo(new HomeFragment(), titles[3]));
+        mShowItems.add(new FragmentInfo(new HomeFragment(), titles[4]));
 
         //初始化viewpager(给viewpager设置适配器)
         mVpMainShowContent.setAdapter(new MainAdapter(getSupportFragmentManager(), mShowItems));
