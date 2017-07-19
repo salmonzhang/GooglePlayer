@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import com.itheima.googleplaymark.R;
 import com.itheima.googleplaymark.bean.HomeBean;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,7 @@ import java.util.List;
 
 public class HomeAdapter extends BaseAdapter {
     private List<HomeBean.HomeItem> datas = new ArrayList<>();
+    private DisplayImageOptions options;
 
     public HomeAdapter(List<HomeBean.HomeItem> datas) {
         this.datas = datas;
@@ -66,6 +70,19 @@ public class HomeAdapter extends BaseAdapter {
         homeViewHolder.tvHomeDesc.setText(datas.get(position).getDes());
 
         homeViewHolder.rbHomeStart.setRating(datas.get(position).getStars());
+
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.mipmap.ic_launcher) //显示图片加载中
+                .showImageForEmptyUri(R.mipmap.ic_launcher) //空的图片
+                .showImageOnFail(R.mipmap.ic_launcher) //错误的图片
+                .cacheInMemory(true) //内存缓存要不要
+                .cacheOnDisk(true) //sd卡缓存要不要
+                .considerExifParams(true)//会识别图片的方向信息
+//                .displayer(new FadeInBitmapDisplayer(500)).build();//显示的效果
+                .displayer(new RoundedBitmapDisplayer(36)).build();//图片圆形效果
+
+        ImageLoader.getInstance().displayImage("http://127.0.0.1:8090/image?name="+datas.get(position).getIconUrl(), homeViewHolder.ivHomeIcon, options);
+
         return convertView;
     }
 

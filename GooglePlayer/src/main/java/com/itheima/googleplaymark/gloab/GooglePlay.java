@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 /**
  * author:salmonzhang
  * Description:定义一个全局的application
@@ -19,5 +22,7 @@ public class GooglePlay extends Application {
         super.onCreate();
         mainHandler = new Handler();
         context = this;
+
+        ImageLoader.getInstance().init( ImageLoaderConfiguration.createDefault(this));
     }
 }
