@@ -33,35 +33,39 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.lv_home_list_layout)
     ListView mLvHomeListLayout;
     private HomeAdapter mHomeAdapter;
+    private LoadPager mLoadPager;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //使用UI切换框架加载页面
-        LoadPager loadPager = new LoadPager(getContext()) {
-            //获取数据
-            @Override
-            protected Object getNetData() {
-                String url = "http://127.0.0.1:8090/home?index=0";
-//              HomeBean homeBean = (HomeBean) JsonCacheManager.getInstance().getCacheData(url, HomeBean.class);
-                HomeBean homeBean = JsonCacheManager.getInstance().getCacheData(url, HomeBean.class);
-                //获取到数据后，将数据添加到mShowItems集合中
-                //从homeBean中获取listview条目中的数据
-                List<HomeBean.HomeItem> homeItems = homeBean.getList();
-                mShowItems.addAll(homeItems);
-                return homeBean;
-            }
 
-            //设置界面
-            @Override
-            public View createSuccessView() {
-                View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home, null);
-                ButterKnife.bind(HomeFragment.this, view);
-                initView();
-                return view;
-            }
-        };
-        return loadPager;
+        if (mLoadPager == null) {
+            mLoadPager = new LoadPager(getContext()) {
+                //获取数据
+                @Override
+                protected Object getNetData() {
+                    String url = "http://127.0.0.1:8090/home?index=0";
+//              HomeBean homeBean = (HomeBean) JsonCacheManager.getInstance().getCacheData(url, HomeBean.class);
+                    HomeBean homeBean = JsonCacheManager.getInstance().getCacheData(url, HomeBean.class);
+                    //获取到数据后，将数据添加到mShowItems集合中
+                    //从homeBean中获取listview条目中的数据
+                    List<HomeBean.HomeItem> homeItems = homeBean.getList();
+                    mShowItems.addAll(homeItems);
+                    return homeBean;
+                }
+
+                //设置界面
+                @Override
+                public View createSuccessView() {
+                    View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home, null);
+                    ButterKnife.bind(HomeFragment.this, view);
+                    initView();
+                    return view;
+                }
+            };
+        }
+        return mLoadPager;
     }
 
     //初始化listview
