@@ -11,7 +11,7 @@ import java.util.List;
 public class HomeBean {
 
     private List<String> picture;
-    private List<ListBean> list;
+    private List<HomeItem> list;
 
     public List<String> getPicture() {
         return picture;
@@ -21,15 +21,15 @@ public class HomeBean {
         this.picture = picture;
     }
 
-    public List<ListBean> getList() {
+    public List<HomeItem> getList() {
         return list;
     }
 
-    public void setList(List<ListBean> list) {
+    public void setList(List<HomeItem> list) {
         this.list = list;
     }
 
-    public static class ListBean {
+    public static class HomeItem {
         /**
          * id : 1525490
          * name : 有缘网
