@@ -92,5 +92,6 @@ public class HomeAdapter extends BaseAdapter {
         public RatingBar rbHomeStart;
         public TextView tvHomeSize;
         public TextView tvHomeDesc;
+
     }
 }
