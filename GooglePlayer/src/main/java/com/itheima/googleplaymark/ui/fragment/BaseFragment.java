@@ -18,7 +18,7 @@ import com.itheima.googleplaymark.uimanager.LoadPager;
 public abstract class BaseFragment extends Fragment {
 
 
-    private LoadPager mLoadPager;
+    public LoadPager mLoadPager;
 
     @Nullable
     @Override

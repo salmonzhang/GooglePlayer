@@ -10,6 +10,9 @@ import com.itheima.googleplaymark.R;
 import com.itheima.googleplaymark.adapter.HomeAdapter;
 import com.itheima.googleplaymark.bean.HomeBean;
 import com.itheima.googleplaymark.cachemanager.JsonCacheManager;
+import com.itheima.googleplaymark.utils.ToastUtil;
+import com.itheima.googleplaymark.utils.Uris;
+import com.itheima.googleplaymark.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +45,55 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public Object questData() {
-        String url = "http://127.0.0.1:8090/home?index=0";
-        HomeBean homeBean = JsonCacheManager.getInstance().getCacheData(url, HomeBean.class);
+
+        /**
+         * 判断当前刷新状态：
+         * 下拉刷新：请求更新数据
+         * 上拉刷新:加载下一页的数据到集合中
+         */
+        if (mPullRefreshList.getCurrentMode() == PullToRefreshBase.Mode.PULL_FROM_START) {
+            mShowItems.clear();
+        }
+
+        HomeBean homeBean = JsonCacheManager.getInstance().getCacheData(Uris.HOMEADDRESS+mShowItems.size(), HomeBean.class);
         //获取到数据后，将数据添加到mShowItems集合中
-        //从homeBean中获取listview条目中的数据
-        List<HomeBean.HomeItem> homeItems = homeBean.getList();
-        mShowItems.addAll(homeItems);
-        return homeBean;
+        /**
+         * 下拉刷新的逻辑分析：
+         * 1：如果集合的总长度为0
+         *    1.1 如果当前数据不为0，则正常添加
+         *    1.2 如果当前数据长度为0 ，则返回null
+         * 2.如果集合的总长度不为0
+         *    2.1 如果当前数据长度为0，则提示用户重新刷新
+         *    2.2 如果当前数据长度不为0，则正常加载数据
+         */
+
+        if (mShowItems.size() == 0) {
+            if (homeBean != null && homeBean.getList() != null && homeBean.getList().size() > 0) {
+                List<HomeBean.HomeItem> homeItems = homeBean.getList();
+                mShowItems.addAll(homeItems);
+            } else {
+                return null;
+            }
+        } else {
+            if (homeBean != null && homeBean.getList() != null && homeBean.getList().size() > 0) {
+                List<HomeBean.HomeItem> homeItems = homeBean.getList();
+                mShowItems.addAll(homeItems);
+            } else {
+                ToastUtil.showToast("请重新刷新数据");
+            }
+        }
+
+        //得到数据后，主线程更新数据
+        Utils.runOnUIThread(new Runnable() {
+            @Override
+            public void run() {
+                //更新数据
+                mHomeAdapter.notifyDataSetChanged();
+                //停止刷新
+                mPullRefreshList.onRefreshComplete();
+            }
+        });
+        return mShowItems;
     }
 
     //初始化listview
@@ -58,6 +103,17 @@ public class HomeFragment extends BaseFragment {
         ListView listView = mPullRefreshList.getRefreshableView();
         //设置刷新模式
         mPullRefreshList.setMode(PullToRefreshBase.Mode.BOTH);
+
+        //设置刷新监听
+        mPullRefreshList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                //下拉时重新请求数据
+                mLoadPager.showPager();
+                ToastUtil.showToast("下拉刷新");
+            }
+        });
+
         listView.setAdapter(mHomeAdapter);
     }
 }
