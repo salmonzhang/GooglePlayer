@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.itheima.googleplaymark.R;
 import com.itheima.googleplaymark.adapter.HomeAdapter;
 import com.itheima.googleplaymark.bean.HomeBean;
@@ -23,8 +25,10 @@ import butterknife.ButterKnife;
 
 public class HomeFragment extends BaseFragment {
 
-    @BindView(R.id.lv_home_list_layout)
-    ListView mLvHomeListLayout;
+    @BindView(R.id.pull_refresh_list)
+    PullToRefreshListView mPullRefreshList;
+    //    @BindView(R.id.lv_home_list_layout)
+//    ListView mLvHomeListLayout;
     private HomeAdapter mHomeAdapter;
     private List<HomeBean.HomeItem> mShowItems = new ArrayList<>();
 
@@ -51,6 +55,9 @@ public class HomeFragment extends BaseFragment {
     private void initView() {
         //给主界面的listview设置适配器
         mHomeAdapter = new HomeAdapter(mShowItems);
-        mLvHomeListLayout.setAdapter(mHomeAdapter);
+        ListView listView = mPullRefreshList.getRefreshableView();
+        //设置刷新模式
+        mPullRefreshList.setMode(PullToRefreshBase.Mode.BOTH);
+        listView.setAdapter(mHomeAdapter);
     }
 }
