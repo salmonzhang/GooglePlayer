@@ -11,6 +11,7 @@ import com.itheima.googleplaymark.adapter.SubjectAdapter;
 import com.itheima.googleplaymark.bean.SubjectBean;
 import com.itheima.googleplaymark.cachemanager.JsonCacheManager;
 import com.itheima.googleplaymark.utils.ToastUtil;
+import com.itheima.googleplaymark.utils.Uris;
 import com.itheima.googleplaymark.utils.Utils;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class SubjectFragment extends BaseFragment {
             mShowItems.clear();
         }
 
-        List<SubjectBean> beanList = JsonCacheManager.getInstance().getCacheList("http://127.0.0.1:8090/subject?index=0", SubjectBean.class);
+        List<SubjectBean> beanList = JsonCacheManager.getInstance().getCacheList(Uris.SUBJECTADDRESS, SubjectBean.class);
         /**
          * 下拉刷新的逻辑：
          * 1：集合长度为0时：
