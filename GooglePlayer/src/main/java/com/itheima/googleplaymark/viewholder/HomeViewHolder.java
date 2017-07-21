@@ -9,11 +9,14 @@ import android.widget.TextView;
 import com.itheima.googleplaymark.R;
 import com.itheima.googleplaymark.bean.HomeBean;
 import com.itheima.googleplaymark.gloab.GooglePlay;
+import com.itheima.googleplaymark.utils.Uris;
 import com.itheima.googleplaymark.utils.Utils;
+
+import butterknife.BindView;
 
 /**
  * author:salmonzhang
- * Description:
+ * Description:首页界面的ViewHolder
  * Date:2017/7/21 0021 19:39
  */
 
@@ -26,42 +29,34 @@ import com.itheima.googleplaymark.utils.Utils;
  * 5：在HomeViewHolder中返回getView方法，避免return convertView时出现空指针
  */
 
-public class HomeViewHolder {
+//使用BaseViewHolder
+public class HomeViewHolder extends BaseViewHolder<HomeBean.HomeItem> {
 
-    private ImageView ivHomeIcon;
-    private TextView tvHomeTitle;
-    private RatingBar rbHomeStart;
-    private TextView tvHomeSize;
-    private TextView tvHomeDesc;
+    @BindView(R.id.iv_home_icon)
+    ImageView mIvHomeIcon;
+    @BindView(R.id.rb_home_start)
+    RatingBar mRbHomeStart;
+    @BindView(R.id.tv_home_title)
+    TextView mTvHomeTitle;
+    @BindView(R.id.tv_home_size)
+    TextView mTvHomeSize;
+    @BindView(R.id.tv_home_desc)
+    TextView mTvHomeDesc;
 
-    private View view;
-    //在构造函数中初始化
-    public HomeViewHolder() {
-        //用填充器填充布局
-        view = View.inflate(GooglePlay.context, R.layout.item_home, null);
-        //初始化成员变量
-        ivHomeIcon = (ImageView) view.findViewById(R.id.iv_home_icon);
-        tvHomeTitle = (TextView) view.findViewById(R.id.tv_home_title);
-        rbHomeStart = (RatingBar) view.findViewById(R.id.rb_home_start);
-        tvHomeSize = (TextView) view.findViewById(R.id.tv_home_size);
-        tvHomeDesc = (TextView) view.findViewById(R.id.tv_home_desc);
-        //绑定
-        view.setTag(this);
-    }
-
-    public void bindView(HomeBean.HomeItem homeItem) {
-        tvHomeTitle.setText(homeItem.getName());
-        //文件大小格式化
-        String fileSize = Formatter.formatFileSize(GooglePlay.context,homeItem.getSize());
-        tvHomeSize.setText(fileSize);
-        tvHomeDesc.setText(homeItem.getDes());
-        rbHomeStart.setRating(homeItem.getStars());
-        Utils.SetRoundedImage("http://127.0.0.1:8090/image?name="+homeItem.getIconUrl(), ivHomeIcon);
-    }
-
-    //定义一个getView方法，返回到getView中
-    public View getView() {
+    //创建布局
+    @Override
+    public View createItemView() {
+        View view = View.inflate(GooglePlay.context, R.layout.item_home, null);
         return view;
     }
 
+    //绑定数据
+    @Override
+    public void bindView(HomeBean.HomeItem homeItem) {
+        mTvHomeTitle.setText(homeItem.getName());
+        mTvHomeSize.setText(Formatter.formatFileSize(GooglePlay.context, homeItem.getSize()));
+        mTvHomeDesc.setText(homeItem.getDes());
+        mRbHomeStart.setRating(homeItem.getStars());
+        Utils.SetRoundedImage(Uris.IMAGEFOREAD+homeItem.getIconUrl(), mIvHomeIcon);
+    }
 }

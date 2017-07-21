@@ -13,4 +13,6 @@ public class Uris {
     public static final String  HOMEADDRESS = HOSEADDRESS+"/home?index=";
     //专题地址
     public static final String SUBJECTADDRESS = HOSEADDRESS+"/subject?index=0";
+    //图片前缀
+    public static final String IMAGEFOREAD = HOSEADDRESS+"/image?name=";
 }
