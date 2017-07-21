@@ -6,7 +6,7 @@
 //
 //import com.handmark.pulltorefresh.library.PullToRefreshListView;
 //import com.itheima.googleplaymark.R;
-//import com.itheima.googleplaymark.adapter.HomeAdapter;
+//import com.itheima.googleplaymark.adapter.BasicAdapter;
 //import com.itheima.googleplaymark.bean.HomeBean;
 //import com.itheima.googleplaymark.cachemanager.JsonCacheManager;
 //
@@ -28,7 +28,7 @@
 //    PullToRefreshListView mPullRefreshList;
 //    //    @BindView(R.id.lv_home_list_layout)
 ////    ListView mLvHomeListLayout;
-//    private HomeAdapter mHomeAdapter;
+//    private BasicAdapter mHomeAdapter;
 //    private List<HomeBean.HomeItem> mShowItems = new ArrayList<>();
 //
 //    @Override
@@ -53,7 +53,7 @@
 //    //初始化listview
 //    private void initView() {
 //        //给主界面的listview设置适配器
-//        mHomeAdapter = new HomeAdapter(mShowItems);
+//        mHomeAdapter = new BasicAdapter(mShowItems);
 //        ListView listView = mPullRefreshList.getRefreshableView();
 //        listView.setAdapter(mHomeAdapter);
 //    }
