@@ -17,4 +17,6 @@ public class Uris {
     public static final String IMAGEFOREAD = HOSEADDRESS+"/image?name=";
     //分类地址
     public static final String CATEGORY = HOSEADDRESS + "/category?index=0";
+    //推荐地址
+    public static final String RECOMMEND = HOSEADDRESS + "/recommend?index=0";
 }
