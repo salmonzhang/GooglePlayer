@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.itheima.googleplaymark.R;
 import com.itheima.googleplaymark.adapter.MainAdapter;
 import com.itheima.googleplaymark.bean.FragmentInfo;
+import com.itheima.googleplaymark.ui.fragment.CategoryFragment;
 import com.itheima.googleplaymark.ui.fragment.HomeFragment;
 import com.itheima.googleplaymark.ui.fragment.SubjectFragment;
 import com.itheima.googleplaymark.utils.Utils;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         mShowItems.add(new FragmentInfo(new HomeFragment(), titles[0]));
         mShowItems.add(new FragmentInfo(new SubjectFragment(), titles[1]));
         mShowItems.add(new FragmentInfo(new HomeFragment(), titles[2]));
-        mShowItems.add(new FragmentInfo(new HomeFragment(), titles[3]));
+        mShowItems.add(new FragmentInfo(new CategoryFragment(), titles[3]));
         mShowItems.add(new FragmentInfo(new HomeFragment(), titles[4]));
 
         //初始化viewpager(给viewpager设置适配器)

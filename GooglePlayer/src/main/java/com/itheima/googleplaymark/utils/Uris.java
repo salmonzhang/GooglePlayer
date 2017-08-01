@@ -15,4 +15,6 @@ public class Uris {
     public static final String SUBJECTADDRESS = HOSEADDRESS+"/subject?index=0";
     //图片前缀
     public static final String IMAGEFOREAD = HOSEADDRESS+"/image?name=";
+    //分类地址
+    public static final String CATEGORY = HOSEADDRESS + "/category?index=0";
 }

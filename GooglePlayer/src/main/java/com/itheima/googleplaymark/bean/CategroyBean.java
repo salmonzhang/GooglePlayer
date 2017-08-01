@@ -1,5 +1,6 @@
 package com.itheima.googleplaymark.bean;
 
+import com.itheima.googleplaymark.interfaces.BodyType;
 import com.itheima.googleplaymark.interfaces.ItemType;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * Date:2017/8/1 0001 16:57
  */
 
-public class CategroyBodyBean implements ItemType{
+public class CategroyBean implements ItemType{
 
     /**
      * title : 游戏
@@ -36,7 +37,7 @@ public class CategroyBodyBean implements ItemType{
         this.infos = infos;
     }
 
-    public static class InfosBean implements ItemType{
+    public static class InfosBean implements BodyType{
         /**
          * url1 : image/category_game_0.jpg
          * url2 : image/category_game_1.jpg
