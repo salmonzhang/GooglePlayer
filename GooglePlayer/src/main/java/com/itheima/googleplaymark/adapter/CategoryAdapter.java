@@ -1,8 +1,14 @@
 package com.itheima.googleplaymark.adapter;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.itheima.googleplaymark.R;
+import com.itheima.googleplaymark.interfaces.BodyType;
+import com.itheima.googleplaymark.interfaces.HeadType;
+import com.itheima.googleplaymark.interfaces.ItemType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +21,9 @@ import java.util.List;
 
 public class CategoryAdapter extends BaseAdapter{
 
-    private List<Object> mShowItems = new ArrayList<>();
+    private List<ItemType> mShowItems = new ArrayList<>();
 
-    public CategoryAdapter(List<Object> showItems) {
+    public CategoryAdapter(List<ItemType> showItems) {
         mShowItems = showItems;
     }
 
@@ -39,12 +45,15 @@ public class CategoryAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //根据条目位置，返回不同的view
+        View view = null;
         switch (getItemViewType(position)) {
             case HEADTYPE:
                 //返回头部的view
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_title, null);
                 break;
             case BODYTYPE:
                 //返回身体的view
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_info, null);
                 break;
         }
         return null;
@@ -58,11 +67,13 @@ public class CategoryAdapter extends BaseAdapter{
     @Override
     public int getItemViewType(int position) {
         //根据条目位置，返回条目类型
-        if (mShowItems.get(position) instanceof String) {
+        if (mShowItems.get(position) instanceof HeadType) {
             return HEADTYPE;
-        } else {
+        }
+        if (mShowItems.get(position) instanceof BodyType) {
             return BODYTYPE;
         }
+        return BODYTYPE;
     }
 
     //条目总数
