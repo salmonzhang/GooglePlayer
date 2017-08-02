@@ -2,6 +2,8 @@ package com.itheima.googleplaymark.utils;
 
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.itheima.googleplaymark.R;
@@ -15,6 +17,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
+import static android.graphics.drawable.GradientDrawable.RECTANGLE;
 import static com.itheima.googleplaymark.gloab.GooglePlay.context;
 
 
@@ -70,7 +73,6 @@ public class Utils
     // 创建一个随机的颜色
     public static int randomColor()
     {
-
         Random random = new Random();
         int red = random.nextInt(180);
         int blue = random.nextInt(180);
@@ -132,6 +134,16 @@ public class Utils
                 .displayer(new FadeInBitmapDisplayer(500)).build();//显示的效果
 //                .displayer(new RoundedBitmapDisplayer(36)).build();//图片圆形效果
         ImageLoader.getInstance().displayImage(iconUrl,iv, options);
+    }
+
+    //随机生成一张shape图片
+    @NonNull
+    public static GradientDrawable getGradientDrawable() {
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setCornerRadius(Utils.getDimens(R.dimen.dp8));
+        gradientDrawable.setShape(RECTANGLE);
+        gradientDrawable.setColor(Utils.randomColor());
+        return gradientDrawable;
     }
 
 }
