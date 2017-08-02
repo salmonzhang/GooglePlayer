@@ -49,20 +49,24 @@ public class CategoryAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         BaseViewHolder baseViewHolder = null;
         if (convertView == null) {
-            View view = null;
+//            View view = null;
             //根据条目位置，返回不同的view
             switch (getItemViewType(position)) {
                 case HEADTYPE:
                     //返回头部的view
-                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_title, null);
+                    convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_title, null);
                     baseViewHolder = new CategoryHeadViewHolder();
+                    convertView.setTag(baseViewHolder);
                     break;
                 case BODYTYPE:
                     //返回身体的view
-                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_info, null);
+                    convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_info, null);
                     baseViewHolder = new CategoryBodyViewHolder();
+                    convertView.setTag(baseViewHolder);
                     break;
             }
+        } else {
+            baseViewHolder = ((BaseViewHolder) convertView.getTag());
         }
 
         //根据条目类型赋值
