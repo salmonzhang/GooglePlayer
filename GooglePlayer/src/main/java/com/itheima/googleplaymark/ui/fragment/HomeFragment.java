@@ -1,6 +1,7 @@
 package com.itheima.googleplaymark.ui.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -126,7 +127,12 @@ public class HomeFragment extends BaseFragment {
                 //启动ShowActivity
                 Intent intent = new Intent(getContext(), ShowActivity.class);
                 intent.putExtra("className", DetailFragment.class);
-                intent.putExtra("str", "HomeFragment中的数据");
+                //使用Bundle传递数据
+                Bundle bundle = new Bundle();
+                bundle.putString("data", "HomeFragment数据");
+                bundle.putInt("num", 18);
+                intent.putExtra("bundle", bundle);
+
                 startActivity(intent);
             }
         });

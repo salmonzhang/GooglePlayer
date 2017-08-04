@@ -23,8 +23,8 @@ public class ShowActivity extends AppCompatActivity {
         //获取传过来的Class
         Class className = (Class) getIntent().getSerializableExtra("className");
 
-        //获取传入的数据
-        String data = getIntent().getStringExtra("str");
+        //获取传入的Bundle数据
+        Bundle bundleExtra = getIntent().getBundleExtra("bundle");
 
 
         try {
@@ -32,9 +32,9 @@ public class ShowActivity extends AppCompatActivity {
             Fragment fragment = (Fragment) className.newInstance();
 
             //将获取到的数据传入到Fragment中
-            Bundle args = new Bundle();
-            args.putString("data", data);
-            fragment.setArguments(args);
+//            Bundle args = new Bundle();
+//            args.putString("data", data);
+            fragment.setArguments(bundleExtra);
 
             //使用事务对ShowActivity的布局进行控制
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_show_layout, fragment).commit();
