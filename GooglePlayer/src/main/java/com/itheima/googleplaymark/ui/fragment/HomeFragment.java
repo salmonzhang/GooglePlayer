@@ -126,6 +126,7 @@ public class HomeFragment extends BaseFragment {
                 //启动ShowActivity
                 Intent intent = new Intent(getContext(), ShowActivity.class);
                 intent.putExtra("className", DetailFragment.class);
+                intent.putExtra("str", "HomeFragment中的数据");
                 startActivity(intent);
             }
         });

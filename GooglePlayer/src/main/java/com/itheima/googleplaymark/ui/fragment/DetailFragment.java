@@ -1,9 +1,8 @@
 package com.itheima.googleplaymark.ui.fragment;
 
+import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-
-import com.itheima.googleplaymark.R;
+import android.widget.TextView;
 
 /**
  * author:salmonzhang
@@ -14,12 +13,14 @@ import com.itheima.googleplaymark.R;
 public class DetailFragment extends BaseFragment {
     @Override
     public View createItemView() {
-//        TextView textView = new TextView(getContext());
-//        textView.setText("详情界面");
+        Bundle bundle = getArguments();
+        String string = bundle.getString("data");
+        TextView textView = new TextView(getContext());
+        textView.setText(string);
 
-        ImageView imageView = new ImageView(getContext());
-        imageView.setImageResource(R.mipmap.ic_launcher);
-        return imageView;
+//        ImageView imageView = new ImageView(getContext());
+//        imageView.setImageResource(R.mipmap.ic_launcher);
+        return textView;
     }
 
     @Override
