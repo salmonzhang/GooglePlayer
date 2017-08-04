@@ -1,7 +1,9 @@
 package com.itheima.googleplaymark.adapter;
 
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.BaseAdapter;
 
 import com.itheima.googleplaymark.viewholder.BaseViewHolder;
@@ -50,7 +52,19 @@ public abstract class BasicAdapter<T> extends BaseAdapter {
         }
         //赋值
         homeViewHolder.bindView(mShowItems.get(position));
-        return homeViewHolder.getView();
+
+        View view = homeViewHolder.getView();
+
+        //给view设置动画效果（有弹性的动态缩小和还原）
+
+        //XY轴缩放
+        view.setScaleX(.6f);
+        view.setScaleY(.6f);
+
+        //使用ViewCompat实现动画还原
+        ViewCompat.animate(view).scaleX(1.0f).scaleY(1.0f).setInterpolator(new OvershootInterpolator()).setDuration(500).start();
+
+        return view;
     }
     public abstract BaseViewHolder createViewholder();
 }
