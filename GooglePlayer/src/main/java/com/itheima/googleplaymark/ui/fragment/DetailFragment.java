@@ -20,8 +20,6 @@ public class DetailFragment extends BaseFragment {
         TextView textView = new TextView(getContext());
         textView.setText(string+"......."+num);
 
-//        ImageView imageView = new ImageView(getContext());
-//        imageView.setImageResource(R.mipmap.ic_launcher);
         return textView;
     }
 

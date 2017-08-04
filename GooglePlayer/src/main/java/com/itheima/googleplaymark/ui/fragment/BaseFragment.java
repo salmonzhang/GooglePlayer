@@ -1,5 +1,6 @@
 package com.itheima.googleplaymark.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.itheima.googleplaymark.ui.activity.ShowActivity;
 import com.itheima.googleplaymark.uimanager.LoadPager;
 
 /**
@@ -46,4 +48,13 @@ public abstract class BaseFragment extends Fragment {
     //子类实现数据请求
     public abstract Object questData();
 
+    //开启Fragment
+    public void startFragment(Class<? extends Fragment> fragmentClass, Bundle bundle) {
+        //启动ShowActivity
+        Intent intent = new Intent(getContext(), ShowActivity.class);
+        intent.putExtra("className",fragmentClass);
+        //使用Bundle传递数据
+        intent.putExtra("bundle", bundle);
+        startActivity(intent);
+    }
 }
