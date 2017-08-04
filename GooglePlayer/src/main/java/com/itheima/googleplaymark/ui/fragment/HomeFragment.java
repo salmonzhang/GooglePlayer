@@ -1,7 +1,9 @@
 package com.itheima.googleplaymark.ui.fragment;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -10,6 +12,7 @@ import com.itheima.googleplaymark.R;
 import com.itheima.googleplaymark.adapter.HomeAdapter;
 import com.itheima.googleplaymark.bean.HomeBean;
 import com.itheima.googleplaymark.cachemanager.JsonCacheManager;
+import com.itheima.googleplaymark.ui.activity.ShowActivity;
 import com.itheima.googleplaymark.utils.ToastUtil;
 import com.itheima.googleplaymark.utils.Uris;
 import com.itheima.googleplaymark.utils.Utils;
@@ -115,5 +118,16 @@ public class HomeFragment extends BaseFragment {
         });
 
         listView.setAdapter(mHomeAdapter);
+
+        //给listview条目设置点击事件
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //启动ShowActivity
+                Intent intent = new Intent(getContext(), ShowActivity.class);
+                intent.putExtra("className", DetailFragment.class);
+                startActivity(intent);
+            }
+        });
     }
 }
